@@ -84,7 +84,7 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
 
     public void searchByProduct() {
 
-    ProductManager add = new ProductManager(new ProductRepository());
+    ProductManager add = new ProductManager(new ProductRepository(), new Product());
 
         add.add(first);
         add.add(second);
@@ -131,6 +131,44 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
 
         Product[] actual = add.searchBy("ме");
         Product[] expected = {first, fifth};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+
+    public void searchByAuthorProduct() {
+
+        ProductManager add = new ProductManager(new ProductRepository());
+
+        add.add(first);
+        add.add(second);
+        add.add(third);
+        add.add(fourth);
+        add.add(fifth);
+
+
+        Product[] actual = add.searchBy("пир");
+        Product[] expected = {first};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+
+    public void searchByBrandProduct() {
+
+        ProductManager add = new ProductManager(new ProductRepository());
+
+        add.add(first);
+        add.add(second);
+        add.add(third);
+        add.add(fourth);
+        add.add(fifth);
+
+
+        Product[] actual = add.searchBy("App");
+        Product[] expected = {second};
 
         Assertions.assertArrayEquals(expected, actual);
     }
