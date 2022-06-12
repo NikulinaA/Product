@@ -13,12 +13,11 @@ public class Product {
     protected double price;
 
 
-
     public boolean matches(String search) {
-        if(name.contains(search)) {
+        if (name.contains(search)) {
             return true;
         }
         return false;
 
-            }
+    }
 }

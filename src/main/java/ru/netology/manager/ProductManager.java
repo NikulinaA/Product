@@ -1,8 +1,8 @@
 package ru.netology.manager;
 
-import ru.netology.domian.Book;
+
 import ru.netology.domian.Product;
-import ru.netology.domian.Smartphone;
+
 import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
@@ -52,22 +52,10 @@ public class ProductManager {
                 result = tmp;
                 index++;
 
-
-                // "добавляем в конец" массива result продукт product
             }
-            /*else if((product.matches(text))) { // вызов метода matches в версии описанной в Product
-                int length = result.length + 1;
-                Product[] tmp = new Product[length];
 
-                System.arraycopy(result, 0, tmp, 0, result.length);
-                int lastIndex = tmp.length - 1;
-                tmp[index] = product;
-                result = tmp;
-                index++;
-            }*/
-
-
-    }
+        }
 
         return result;
-    }}
+    }
+}
