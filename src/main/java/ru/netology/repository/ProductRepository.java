@@ -13,7 +13,8 @@ public class ProductRepository {
 
     public ProductRepository() {
     }
-    public void save(Product item){
+
+    public void save(Product item) {
         int length = items.length + 1;
         Product[] tmp = new Product[length];
 
@@ -26,8 +27,9 @@ public class ProductRepository {
     public Product[] findAll() {
         return items;
     }
-    public Product[] removeById () {
-        Product[] find = new  Product[0];
+
+    public Product[] removeById() {
+        Product[] find = new Product[0];
         find = findById();
         if (find.length != 0) {
             int length = items.length - 1;
@@ -40,9 +42,11 @@ public class ProductRepository {
                 }
             }
 
-        return tmp;}
+            return tmp;
+        }
         return items;
     }
+
     public Product[] findById() {
         int length = items.length - 1;
         Product[] tmp = new Product[length];
@@ -53,9 +57,9 @@ public class ProductRepository {
                 index++;
             }
         }
-        Product[] ind = new Product[index];
-        System.arraycopy(tmp, 0, ind, 0, ind.length);
+        Product[] find = new Product[index];
+        System.arraycopy(tmp, 0, find, 0, find.length);
 
-        return ind;
-        }
+        return find;
+    }
 }

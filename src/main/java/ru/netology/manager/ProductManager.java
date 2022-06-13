@@ -3,7 +3,6 @@ package ru.netology.manager;
 import ru.netology.domian.Product;
 import ru.netology.repository.ProductRepository;
 
-import static java.lang.Character.getName;
 
 public class ProductManager {
     private ProductRepository repository;
@@ -21,11 +20,12 @@ public class ProductManager {
         Product[] items = repository.findAll();
         return items;
     }
+
     public Product[] removeById() {
         Product[] items = repository.removeById();
 
-        return items;}
-
+        return items;
+    }
 
 
     public Product[] searchBy(String text) {
@@ -33,12 +33,10 @@ public class ProductManager {
         int index = 0;
 
         Product[] result = new Product[index]; // тут будем хранить подошедшие запросу продукты
-        for (Product product: repository.findAll()) {
+        for (Product product : repository.findAll()) {
             if (matches(product, text)) {
                 int length = result.length + 1;
                 Product[] tmp = new Product[length];
-
-
 
 
                 System.arraycopy(result, 0, tmp, 0, result.length);
@@ -47,10 +45,8 @@ public class ProductManager {
                 result = tmp;
                 index++;
 
-
-                // "добавляем в конец" массива result продукт product
             }
-            }
+        }
         return result;
     }
 

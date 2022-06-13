@@ -9,11 +9,11 @@ import ru.netology.repository.ProductRepository;
 
 public class ProductManagerTest {
 
-Product first = new Book(1,"Ромео и Джульета", 500, "Шекспир");
-Product second = new Smartphone(2,"IPhone 13 PRO", 92502,"Apple");
-Product third = new Smartphone(3,"Galaxy S22+", 89000.20,"Samsung");
-Product fourth = new Book(4,"Фауст", 300.20,"Гёте");
-Product fifth = new Book(5,"Герой нашего времени",658.25,"Лермонтов");
+    Product first = new Book(1, "Ромео и Джульета", 500, "Шекспир");
+    Product second = new Smartphone(2, "IPhone 13 PRO", 92502, "Apple");
+    Product third = new Smartphone(3, "Galaxy S22+", 89000.20, "Samsung");
+    Product fourth = new Book(4, "Фауст", 300.20, "Гёте");
+    Product fifth = new Book(5, "Герой нашего времени", 658.25, "Лермонтов");
 
 
     @Test
@@ -40,13 +40,12 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
         ProductManager add = new ProductManager(new ProductRepository());
 
 
-
-
         Product[] actual = add.findAll();
         Product[] expected = {};
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
 
     public void RemoveNoId() {
@@ -59,7 +58,7 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
         add.add(fifth);
 
         Product[] actual = add.removeById();
-        Product[] expected = {first,second, third, fourth, fifth};
+        Product[] expected = {first, second, third, fourth, fifth};
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -80,11 +79,12 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
 
     public void searchByProduct() {
 
-    ProductManager add = new ProductManager(new ProductRepository());
+        ProductManager add = new ProductManager(new ProductRepository());
 
         add.add(first);
         add.add(second);
@@ -93,11 +93,12 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
         add.add(fifth);
 
 
-    Product[] actual = add.searchBy("Gala");
-    Product[] expected = {third};
+        Product[] actual = add.searchBy("Gala");
+        Product[] expected = {third};
 
         Assertions.assertArrayEquals(expected, actual);
-}
+    }
+
     @Test
 
     public void searchByNoProduct() {
@@ -116,6 +117,7 @@ Product fifth = new Book(5,"Герой нашего времени",658.25,"Ле
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
 
     public void searchByNumberProduct() {
