@@ -1,11 +1,16 @@
 package ru.netology.manager;
 
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.domian.Book;
 import ru.netology.domian.Product;
 import ru.netology.domian.Smartphone;
+import ru.netology.repository.NotFoundException;
 import ru.netology.repository.ProductRepository;
+
 
 public class ProductManagerTest {
 
@@ -14,7 +19,7 @@ public class ProductManagerTest {
     Product third = new Smartphone(3, "Galaxy S22+", 89000.20, "Samsung");
     Product fourth = new Book(4, "Фауст", 300.20, "Гёте");
     Product fifth = new Book(5, "Герой нашего времени", 658.25, "Лермонтов");
-
+    Product sixth = new Book(5, "Герой нашего времени", 658.25, "Лермонтов");
 
     @Test
 
@@ -57,10 +62,7 @@ public class ProductManagerTest {
         add.add(fourth);
         add.add(fifth);
 
-        Product[] actual = add.removeById();
-        Product[] expected = {first, second, third, fourth, fifth};
-
-        Assertions.assertArrayEquals(expected, actual);
+        assertThrows(NotFoundException.class, add::removeById);
     }
 
     @Test
@@ -74,7 +76,8 @@ public class ProductManagerTest {
         add.add(fourth);
         add.add(fifth);
 
-        Product[] actual = add.removeById();
+        add.removeById();
+        Product[] actual = add.findAll();
         Product[] expected = {first, third, fourth, fifth};
 
         Assertions.assertArrayEquals(expected, actual);

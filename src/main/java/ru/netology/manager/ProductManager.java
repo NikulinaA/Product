@@ -21,18 +21,15 @@ public class ProductManager {
         return items;
     }
 
-    public Product[] removeById() {
-        Product[] items = repository.removeById();
-
-        return items;
+    public void removeById() {
+        repository.removeById();
     }
-
 
     public Product[] searchBy(String text) {
 
         int index = 0;
 
-        Product[] result = new Product[index]; // тут будем хранить подошедшие запросу продукты
+        Product[] result = new Product[index];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
                 int length = result.length + 1;
@@ -58,7 +55,6 @@ public class ProductManager {
         } else {
             return false;
         }
-        // или в одну строку:
-        // return product.getName().contains(search);
+
     }
 }

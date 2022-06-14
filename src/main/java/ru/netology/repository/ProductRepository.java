@@ -22,6 +22,7 @@ public class ProductRepository {
         int lastIndex = tmp.length - 1;
         tmp[lastIndex] = item;
         items = tmp;
+
     }
 
     public Product[] findAll() {
@@ -29,9 +30,8 @@ public class ProductRepository {
     }
 
     public Product[] removeById() {
-        Product[] find = new Product[0];
-        find = findById();
-        if (find.length != 0) {
+
+        if (findById() != null) {
             int length = items.length - 1;
             Product[] tmp = new Product[length];
             int index = 0;
@@ -41,10 +41,12 @@ public class ProductRepository {
                     index++;
                 }
             }
+            items = tmp;
 
-            return tmp;
+            return items;
         }
-        return items;
+
+        throw new NotFoundException("Идентификатор " + id + " не найден. Введите валидный идентификатор.");
     }
 
     public Product[] findById() {
@@ -59,7 +61,9 @@ public class ProductRepository {
         }
         Product[] find = new Product[index];
         System.arraycopy(tmp, 0, find, 0, find.length);
-
-        return find;
+        if (find.length != 0) {
+            return find;
+        }
+        return null;
     }
 }
