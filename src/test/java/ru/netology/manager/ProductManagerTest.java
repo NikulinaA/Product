@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domian.Book;
 import ru.netology.domian.Product;
 import ru.netology.domian.Smartphone;
+import ru.netology.repository.AlreadyExistsException;
 import ru.netology.repository.NotFoundException;
 import ru.netology.repository.ProductRepository;
 
@@ -41,6 +42,20 @@ public class ProductManagerTest {
 
     @Test
 
+    public void AddTwoProduct() {
+        ProductManager add = new ProductManager(new ProductRepository());
+
+
+        add.add(fifth);
+
+        assertThrows(AlreadyExistsException.class, () -> {
+            add.add(sixth);
+        });
+
+    }
+
+    @Test
+
     public void AddNoProduct() {
         ProductManager add = new ProductManager(new ProductRepository());
 
@@ -54,7 +69,7 @@ public class ProductManagerTest {
     @Test
 
     public void RemoveNoId() {
-        ProductManager add = new ProductManager(new ProductRepository(258));
+        ProductManager add = new ProductManager(new ProductRepository());
 
         add.add(first);
         add.add(second);
@@ -62,13 +77,13 @@ public class ProductManagerTest {
         add.add(fourth);
         add.add(fifth);
 
-        assertThrows(NotFoundException.class, add::removeById);
+        assertThrows(NotFoundException.class, () -> {add.removeById(547);});
     }
 
     @Test
 
     public void RemoveId() {
-        ProductManager add = new ProductManager(new ProductRepository(2));
+        ProductManager add = new ProductManager(new ProductRepository());
 
         add.add(first);
         add.add(second);
@@ -76,7 +91,7 @@ public class ProductManagerTest {
         add.add(fourth);
         add.add(fifth);
 
-        add.removeById();
+        add.removeById(2);
         Product[] actual = add.findAll();
         Product[] expected = {first, third, fourth, fifth};
 

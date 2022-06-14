@@ -5,16 +5,17 @@ import ru.netology.domian.Product;
 public class ProductRepository {
 
     private Product[] items = new Product[0];
-    private int id;
 
-    public ProductRepository(int id) {
-        this.id = id;
-    }
 
     public ProductRepository() {
     }
 
     public void save(Product item) {
+        int id = item.getId();
+        if (findById(id) != null) {
+            throw new AlreadyExistsException("Идентификатор " + item.getId() + " уже существует");
+        }
+
         int length = items.length + 1;
         Product[] tmp = new Product[length];
 
@@ -23,18 +24,20 @@ public class ProductRepository {
         tmp[lastIndex] = item;
         items = tmp;
 
+
+
     }
 
     public Product[] findAll() {
         return items;
     }
 
-    public Product[] removeById() {
+    public void removeById(int id) {
+        int length = items.length - 1;
+        Product[] tmp = new Product[length];
+        int index = 0;
+        if (findById(id) != null) {
 
-        if (findById() != null) {
-            int length = items.length - 1;
-            Product[] tmp = new Product[length];
-            int index = 0;
             for (Product item : items) {
                 if (item.getId() != id) {
                     tmp[index] = item;
@@ -43,15 +46,14 @@ public class ProductRepository {
             }
             items = tmp;
 
-            return items;
         }
 
-        throw new NotFoundException("Идентификатор " + id + " не найден. Введите валидный идентификатор.");
+        else {throw new NotFoundException("Идентификатор " + id + " не найден. Введите валидный идентификатор.");}
     }
 
-    public Product[] findById() {
-        int length = items.length - 1;
-        Product[] tmp = new Product[length];
+    public Product[] findById(int id) {
+
+        Product[] tmp = new Product[items.length];
         int index = 0;
         for (Product item : items) {
             if (item.getId() == id) {
@@ -63,6 +65,7 @@ public class ProductRepository {
         System.arraycopy(tmp, 0, find, 0, find.length);
         if (find.length != 0) {
             return find;
+
         }
         return null;
     }

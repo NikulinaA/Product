@@ -21,8 +21,8 @@ public class ProductManager {
         return items;
     }
 
-    public void removeById() {
-        repository.removeById();
+    public void removeById(int id) {
+        repository.removeById(id);
     }
 
     public Product[] searchBy(String text) {
